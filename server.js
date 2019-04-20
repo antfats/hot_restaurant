@@ -11,6 +11,7 @@ let PORT = 8080;
 // Sets up the Express app to handle data parsing
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(express.static(__dirname + '/'));
 
 //=================Used to store the data==================
 let customerWaitlist = [
@@ -24,36 +25,40 @@ let customerWaitlist = [
 ];
 
 
-app.get('/', (req, res) =>{
+app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-app.get('/reservation', (req, res) =>{
+app.get('/reservation', (req, res) => {
     res.sendFile(path.join(__dirname, 'reservation.html'));
 });
 
-app.get('/tables', (req, res) =>{
+app.get('/tables', (req, res) => {
     res.sendFile(path.join(__dirname, 'tables.html'));
 });
 
-app.get('/api/tables', (req, res) =>{
+app.get('/api/tables', (req, res) => {
     return res.json(customerWaitlist);
 });
 
-app.get('/api/waitlist', (req, res) =>{
-    
+app.get('/api/waitlist', (req, res) => {
+
 });
 
+//============Post new customers to the Arr=====================
+app.post('/api/reservation/:customerWaitList', (req, res) => {
+    let newCustomer = req.body;
 
+    console.log(newCustomer);
 
-
-
-
+    customerWaitlist.push(newCustomer);
+    res.json(newCustomer);
+});
 
 //========starts server and listens to the port==================
-app.listen(PORT, function() {
+app.listen(PORT, function () {
     console.log("App listening on PORT " + PORT);
-  });
+});
 
 
 

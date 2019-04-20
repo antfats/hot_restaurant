@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" type="text/css" href="/reset.css">
+    <link rel="stylesheet" type="text/css"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/style.css">
+    <title>Hot Restaurant</title>
+</head>
+
+<body>
+    <div class='container header'>
+        <div class="row">
+            <div class='col-sm'>
+                <div class="jumbotron">
+                    <h1 class="display-4">Restaurant Diner App</h1>
+                    <p class="lead">Again, No psycho's</p>
+                    <hr class="my-4">
+                    <p>Please input all fields</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    </header>
+
+    <div class="container">
+        <div class="input-group flex-nowrap">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="addon-wrapping">Name</span>
+            </div>
+            <input type="text" class="form-control" id="name" placeholder="Name" aria-label="Username"
+                aria-describedby="addon-wrapping">
+        </div>
+        <div class="input-group flex-nowrap">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="addon-wrapping">Phone Number</span>
+            </div>
+            <input type="text" class="form-control" id="phoneNum" placeholder="Phone Number" aria-label="Username"
+                aria-describedby="addon-wrapping">
+        </div>
+        <div class="input-group flex-nowrap">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="addon-wrapping">Email</span>
+            </div>
+            <input type="text" class="form-control" id="email" placeholder="Emails" aria-label="Username"
+                aria-describedby="addon-wrapping">
+        </div>
+        <div class="input-group flex-nowrap">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="addon-wrapping">Unique ID</span>
+            </div>
+            <input type="text" class="form-control" id="uniqueID" placeholder="Unique ID" aria-label="Username"
+                aria-describedby="addon-wrapping">
+        </div>
+        <a style="float:right" class="btn btn-primary btn-lg" id="submitBtn" role="button">Submit</a>
+
+
+    </div>
+
+    <!-- Bootstrap JS Links -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <!-- JS Pages linked in -->
+    <script rel="JavaScript">
+
+
+        $(document).ready(() => {
+            console.log("HI WORLDDD");
+
+            $("#submitBtn").click(function (event) {
+                // event.preventDefault();
+                var newRes = {
+                    name: $("#name").val(),
+                    phoneNum: $("#phoneNum").val(),
+                    email: $("#email").val(),
+                    uniqueID: $("#uniqueID").val()
+                }
+                $.post('/api/reservation/:customerWaitList', newRes)
+                    .then((data) => {
+                        let newCustomer = req.body;
+                        console.log(newCustomer);
+                        customerWaitlist.push(newCustomer);
+                        res.json(newCustomer);
+                    });
+                $('form :input').val('');
+            });
+        });
+    </script>
+</body>
+
+</html>
